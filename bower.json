@@ -1,0 +1,14 @@
+{
+  "name": "frnt",
+  "version": "0.0.1",
+  "authors": [
+    "Joe Taylor <jm_taylor@live.co.uk>"
+  ],
+  "description": "Bower dependencies for frnt",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.17"
+  }
+}
