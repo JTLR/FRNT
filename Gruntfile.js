@@ -25,6 +25,16 @@ module.exports = function(grunt) {
                 drop_console: true,
                 ext: ".min.js",
                 extDot: "last"
+            },
+            site: {
+                src: ["src/js/*.js", "!src/js/*.min.js"],
+                dest: "dist/js",
+                sourceMap: true,
+                expand: true,
+                flatten: true,
+                drop_console: true,
+                ext: ".min.js",
+                extDot: "last"
             }
         },
 
@@ -81,9 +91,13 @@ module.exports = function(grunt) {
                 files: ["images/*.{png,jpg,gif}"],
                 tasks: ["imagemin:dynamic"]
             },
-            js: {
+            jsLibs: {
                 files: ["src/js/libs/*.js", "!src/js/libs/*.min.js"],
                 tasks: ["uglify:libs"]
+            },
+            jsSite: {
+                files: ["src/js/*.js", "!src/js/*.min.js"],
+                tasks: ["uglify:site"]
             },
             scss: {
                 files: ["src/scss/**/*.scss"],
