@@ -1,33 +1,49 @@
 module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        // Build tools
+        pkg: grunt.file.readJSON("package.json"),
+
+        // jade/html
+        jade: {
+            files: {
+                src: "src/jade/*.jade",
+                dest: "dist/html",
+                flatten: true,
+                expand: true,
+                ext: ".html"
+            }
+        },
+
+        // js
         uglify: {
             libs: {
-                src: ['javascript/libs/*.js', '!javascript/libs/*.min.js'],
-                dest: 'javascript/libs',
+                src: ["src/js/libs/*.js", "!src/js/libs/*.min.js"],
+                dest: "dist/js/libs",
+                sourceMap: true,
                 expand: true,
                 flatten: true,
                 drop_console: true,
-                ext: '.min.js',
-                extDot: 'last'
+                ext: ".min.js",
+                extDot: "last"
             }
         },
+
+        // scss/css
         sass: {
             dev: {
                 files: {
-                    'css/stylesheet.css': 'sass/stylesheet.scss',
+                    "dist/css/stylesheet.css": "src/scss/stylesheet.scss",
                 },
                 options : {
-                    sourceComments: 'normal'
+                    sourceComments: "normal",
+                    includePaths: require("node-bourbon").includePaths
                 }
             }
         },
         cmq: {
             stylesheet: {
                 files: {
-                    'css/stylesheet.css': ['css/stylesheet.css']
+                    "dist/css/stylesheet.css": ["dist/css/stylesheet.css"]
                 }
             }
 
@@ -35,75 +51,57 @@ module.exports = function(grunt) {
         cssmin: {
             stylesheet: {
                 files: {
-                    'css/stylesheet.min.css': ['css/stylesheet.css']
+                    "dist/css/stylesheet.min.css": ["dist/css/stylesheet.css"]
                 }
             }
         },
+
+        // img
         imagemin: {
             dynamic: {
                 options: {
                     optimizationLevel: 7
                 },
                 files: [{
-                    expand: true,
-                    cwd: 'images/',       
-                    src: 'images/*.{png,jpg,gif}',
-                    dest: 'images/optimised/'
+                    expand: true,     
+                    src: "src/img/*.{png,jpg,gif}",
+                    dest: "dist/img/"
                 }]
             }
         },
-        requirejs: {
-            compile: {
-                options: {
-                    baseUrl: 'javascript/',
-                    mainConfigFile: 'javascript/main.js',
-                    name: 'main',
-                    out: 'javascript/main.min.js',
-                    preserveLicenseComments: false,
-                    uglify: {
-                        expand: true,
-                        flatten: true,
-                        drop_console: true
-                    }
-                }
-            }
-        },
-        // Tasks
+
+
+        // watch
         watch: {
-            images: {
-                files: ['images/*.{png,jpg,gif}'],
-                tasks: ['imagemin:dynamic']
+            jade: {
+                files: ["src/jade/*.jade"],
+                tasks: ["jade"]
             },
-            javascriptMain: {
-                files: ['javascript/**/*.js', '!javascript/**/*.min.js'],
-                tasks: ['requirejs']
+            img: {
+                files: ["images/*.{png,jpg,gif}"],
+                tasks: ["imagemin:dynamic"]
             },
-            javascriptPlugins: {
-                files: ['javascript/*/*.js', '!javascript/*/*.min.js'],
-                tasks: ['uglify:plugins']
+            js: {
+                files: ["src/js/libs/*.js", "!src/js/libs/*.min.js"],
+                tasks: ["uglify:libs"]
             },
-            sass: {
-                files: ['sass/**/*.scss'],
-                tasks: ['sass', 'cmq', 'cssmin']
-            },
-            haml : {
-                files: ['*.haml'],
-                tasks: ['haml']
+            scss: {
+                files: ["src/scss/**/*.scss"],
+                tasks: ["sass", "cmq", "cssmin"]
             }
         }
     });
 
     // Load npm tasks
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-combine-media-queries');
-    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-imagemin");
+    grunt.loadNpmTasks("grunt-contrib-requirejs");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
+    grunt.loadNpmTasks("grunt-contrib-jade");
+    grunt.loadNpmTasks("grunt-combine-media-queries");
+    grunt.loadNpmTasks("grunt-sass");
 
     // Defined tasks
-    grunt.registerTask('validate', ['jshint', 'csslint']);
-    grunt.registerTask('prod', ['haml', 'requirejs', 'uglify:plugins', 'sass', 'cmq', 'uncss', 'cssmin', 'imagemin', 'clean']);
-    grunt.registerTask('un-css', ['uncss', 'cssmin']);
+    grunt.registerTask("default", ["watch"]);
 };
