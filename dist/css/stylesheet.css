@@ -203,3 +203,35 @@ table {
 	width: 33.33%;
 }
 
+/* line 1, /home/joseph/Projects/front/src/scss/site/_demo.scss */
+
+body {
+	text-align: center;
+	font-family: Arial, Helvetica;
+}
+
+/* line 8, /home/joseph/Projects/front/src/scss/site/_demo.scss */
+
+.site-header {
+	font-size: 30px;
+	padding: 30px;
+	color: #fff;
+	background-color: #4aa;
+}
+
+/* line 15, /home/joseph/Projects/front/src/scss/site/_demo.scss */
+
+.site-main {
+	font-size: 30px;
+	padding: 30px;
+}
+
+/* line 20, /home/joseph/Projects/front/src/scss/site/_demo.scss */
+
+.site-footer {
+	font-size: 30px;
+	padding: 30px;
+	color: #fff;
+	background-color: #333;
+}
+

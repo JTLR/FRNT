@@ -95,6 +95,9 @@ module.exports = function(grunt) {
 
         // watch
         watch: {
+            options: {
+                livereload: true
+            },
             jade: {
                 files: ["src/jade/**/*.jade"],
                 tasks: ["jade"]
@@ -122,7 +125,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-imagemin");
-    grunt.loadNpmTasks("grunt-contrib-requirejs");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-combine-media-queries");
