@@ -81,10 +81,9 @@ module.exports = function(grunt) {
         // img
         imagemin: {
             dynamic: {
-                options: {
-                    optimizationLevel: 7
-                },
                 files: [{
+                    optimizationLevel: 7,
+                    flatten: true,
                     expand: true,     
                     src: "src/img/*.{png,jpg,gif}",
                     dest: "dist/img/"
@@ -103,7 +102,7 @@ module.exports = function(grunt) {
                 tasks: ["jade"]
             },
             img: {
-                files: ["images/*.{png,jpg,gif}"],
+                files: ["src/img/*.{png,jpg,gif}"],
                 tasks: ["imagemin:dynamic"]
             },
             jsLibs: {
