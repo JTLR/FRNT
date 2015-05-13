@@ -1,27 +1,27 @@
 {
-  "name": "frnt",
-  "version": "0.0.2",
-  "description": "Grunt dependencies for frnt",
-  "author": "Joe Taylor <jm_taylor@live.co.uk>",
-  "license": "MIT",
-  "scripts": {
-    "postinstall": "bower install"
-  },
-  "devDependencies": {
-    "bower": "~1.4.1",
-    "grunt": "~0.4.5",
-    "grunt-contrib-concat": "~0.5.1",
-    "grunt-contrib-imagemin": "~0.9.4",
-    "grunt-contrib-uglify": "~0.9.1",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-sass": "~1.0.0",
-    "grunt-shell": "~1.1.2",
-    "node-bourbon": "~4.2.2",
-    "grunt-contrib-jade": "~0.14.1",
-    "grunt-combine-media-queries": "~1.0.19",
-    "grunt-contrib-cssmin": "~0.12.3",
-    "grunt-contrib-requirejs": "~0.4.4",
-    "grunt-contrib-livereload": "~0.1.2",
-    "grunt-autoprefixer": "~3.0.0"
-  }
+    "name": "frnt",
+    "version": "0.0.2",
+    "description": "Grunt dependencies for frnt",
+    "author": "Joe Taylor <jm_taylor@live.co.uk>",
+    "license": "MIT",
+    "scripts": {
+        "postinstall": "bower install"
+    },
+    "devDependencies": {
+        "bower": "~1.4.1",
+        "grunt": "~0.4.5",
+        "grunt-contrib-concat": "~0.5.1",
+        "grunt-contrib-imagemin": "~0.9.4",
+        "grunt-contrib-uglify": "~0.9.1",
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-sass": "~1.0.0",
+        "grunt-shell": "~1.1.2",
+        "node-bourbon": "~4.2.2",
+        "grunt-contrib-jade": "~0.14.1",
+        "grunt-combine-media-queries": "~1.0.19",
+        "grunt-contrib-cssmin": "~0.12.3",
+        "grunt-contrib-requirejs": "~0.4.4",
+        "grunt-contrib-livereload": "~0.1.2",
+        "grunt-autoprefixer": "~3.0.0"
+    }
 }
