@@ -33,6 +33,58 @@ frnt is a minimal starter kit for front-end web projects including HTML (compile
 
 [[ CONTENT ]]
 
+## Documentation
+
+[[ CONTENT ]]
+
+### HTML/Jade
+
+[[ CONTENT ]]
+
+#### Templates
+
+[[ CONTENT ]]
+
+#### Partials
+
+[[ CONTENT ]]
+
+### CSS/Scss
+
+[[ CONTENT ]]
+
+#### Helpers
+
+[[ CONTENT ]]
+
+#### Variables
+
+[[ CONTENT ]]
+
+#### Functions
+
+[[ CONTENT ]]
+
+#### Mixins
+
+[[ CONTENT ]]
+
+#### Classes
+
+[[ CONTENT ]]
+
+### JS
+
+[[ CONTENT ]]
+
+#### Libraries
+
+[[ CONTENT ]]
+
+### Grunt
+
+[[ CONTENT ]]
+
 ## Bugs, feature requests and contributions
 
 [[ CONTENT ]]
