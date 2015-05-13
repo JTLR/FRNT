@@ -1,10 +1,10 @@
-# frnt 
+# FRNT 
 
-###### Contents
+## Contents
 
 - What is it?
-- Getting started
 - What's included?
+- Getting started
 - Documentation
 	- HTML/Jade
 		- Templates
@@ -23,15 +23,17 @@
 
 ## What is it?
 
-frnt is a minimal starter kit for front-end web projects including HTML (compiled from Jade), CSS (compiled from Scss) and Javascript (with jQuery).
-
-## Getting started
-
-[[ CONTENT ]]
+FRNT is a minimal starter kit for front-end web projects designed with speed and simplicity in mind, allowing developers to begin building quickly and efficiently.
 
 ## What's included?
 
 [[ CONTENT ]]
+
+## Getting started
+
+To get started simply clone the repository or download and extract the zip then run `npm install` followed by `bower install` (assuming you have npm and bower installed on your machine). This will download all of FRNT's required dependencies.
+
+Once this has finished run `grunt` to watch for and compile any changes you make.
 
 ## Documentation
 

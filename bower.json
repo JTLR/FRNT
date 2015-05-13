@@ -1,10 +1,10 @@
 {
-    "name": "frnt",
+    "name": "FRNT",
     "version": "0.0.2",
     "authors": [
         "Joe Taylor <jm_taylor@live.co.uk>"
     ],
-    "description": "Bower dependencies for frnt",
+    "description": "Bower dependencies for FRNT",
     "license": "MIT",
     "private": false,
     "dependencies": {
