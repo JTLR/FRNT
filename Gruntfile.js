@@ -5,6 +5,9 @@ module.exports = function(grunt) {
 
         // jade/html
         jade: {
+            options: {
+                pretty: true
+            },
             files: {
                 src: "src/jade/*.jade",
                 dest: "dist/html",
@@ -50,6 +53,15 @@ module.exports = function(grunt) {
                 }
             }
         },
+        autoprefixer: {
+            options: {
+                browsers: ["last 2 versions", "ie 8", "ie 9"]
+            },
+            stylesheet: {
+                src: "dist/css/stylesheet.css",
+                dest: "dist/css/stylesheet.css"
+            }
+        },
         cmq: {
             stylesheet: {
                 files: {
@@ -84,7 +96,7 @@ module.exports = function(grunt) {
         // watch
         watch: {
             jade: {
-                files: ["src/jade/*.jade"],
+                files: ["src/jade/**/*.jade"],
                 tasks: ["jade"]
             },
             img: {
@@ -101,7 +113,7 @@ module.exports = function(grunt) {
             },
             scss: {
                 files: ["src/scss/**/*.scss"],
-                tasks: ["sass", "cmq", "cssmin"]
+                tasks: ["sass", "autoprefixer", "cmq", "cssmin"]
             }
         }
     });
@@ -115,6 +127,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-jade");
     grunt.loadNpmTasks("grunt-combine-media-queries");
     grunt.loadNpmTasks("grunt-sass");
+    grunt.loadNpmTasks("grunt-autoprefixer");
 
     // Defined tasks
     grunt.registerTask("default", ["watch"]);
