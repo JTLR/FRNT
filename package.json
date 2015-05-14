@@ -3,6 +3,10 @@
     "version": "0.0.2",
     "description": "Grunt dependencies for FRNT",
     "author": "Joe Taylor <jm_taylor@live.co.uk>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JTLR/FRNT"
+    }
     "license": "MIT",
     "devDependencies": {
         "bower": "~1.4.1",
