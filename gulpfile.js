@@ -8,17 +8,29 @@ var gulp = require("gulp"),
 	autoprefixer = require("gulp-autoprefixer"),
 	minifyCss = require("gulp-minify-css"),
 	autoprefixer = require("gulp-autoprefixer"),
+	imagemin = require("gulp-imagemin"),
+	watch = require("gulp-watch"),
+	notify = require("gulp-notify"),
+	livereload = require("gulp-livereload"),
 	combineMq = require("gulp-combine-mq");
 
-gulp.task("default", function() {
-	// place code for your default task here
+gulp.task("default", ["watch"], function() {
+
 });
 
+gulp.task("watch", function() {
+	livereload.listen();
+	gulp.watch("src/scss/**/*.scss", ["sass"]);
+	gulp.watch("src/js/**/*.js", ["uglify"]);
+	gulp.watch("src/jade/**/*.jade", ["jade"]);
+	gulp.watch("src/img/**/*.{jpg,gif,png}", ["imagemin"]);
+});
  
 gulp.task("jade", function() { 
 	gulp.src("src/jade/*.jade")
 		.pipe(jade())
-		.pipe(gulp.dest("dist/html"));
+		.pipe(gulp.dest("dist/html"))
+		.pipe(livereload());
 });
 
  
@@ -28,7 +40,8 @@ gulp.task("uglify", function() {
 		.pipe(rename({
 			extname: ".min.js"
 		}))
-		.pipe(gulp.dest("dist/js"));
+		.pipe(gulp.dest("dist/js"))
+		.pipe(livereload());
 });
 
 gulp.task("sass", function () {
@@ -45,4 +58,15 @@ gulp.task("sass", function () {
 		}))
 		.pipe(minifyCss())
 		.pipe(gulp.dest("dist/css"))
+		.pipe(livereload());
+});
+
+gulp.task("imagemin", function () {
+	return gulp.src("src/img/**/*")
+		.pipe(imagemin({
+			progressive: true,
+			optimizationLevel: 7
+		}))
+		.pipe(gulp.dest("dist/img"))
+		.pipe(livereload());
 });
