@@ -1,7 +1,7 @@
 {
   "name": "FRNT",
   "version": "0.0.2",
-  "description": "Grunt dependencies for FRNT",
+  "description": "NPM dependencies for FRNT",
   "author": "Joe Taylor <jm_taylor@live.co.uk>",
   "repository": {
     "type": "git",
