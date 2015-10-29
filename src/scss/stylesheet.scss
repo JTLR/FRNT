@@ -1,14 +1,11 @@
 // Libs
-//@import "bourbon";
+@import "libs/libs";
 
 // Base
-@import "base/reset";
+@import "base/base";
 
 // Helpers
-@import "helpers/variables";
-@import "helpers/functions";
-@import "helpers/mixins";
-@import "helpers/classes";
+@import "helpers/helpers";
 
 // Site specific
-@import "site/main";
+@import "site/site";
