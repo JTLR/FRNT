@@ -1,8 +1,8 @@
-@function rem ($pixels) {
-	@if $stylesheet == "ie" {
-		@return $pixels + px;
+@function rem ($pixels, $support: true) {
+	@if $support == true {
+		@return ($pixels / 16) + rem;
 	}
 	@else {
-		@return ($pixels / 16) + rem;
+		@return $pixels + px;
 	}
 }

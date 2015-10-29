@@ -1,32 +1,79 @@
-// Spacing
+// Margin
 .no-margin {
 	margin: 0;
+
+	&--top {
+		margin-top: 0;
+	}
+
+	&--bottom {
+		margin-bottom: 0;
+	}
+
+	&--right {
+		margin-right: 0;
+	}
+
+	&--left {
+		margin-left: 0;
+	}
+}
+
+// Floats
+.float {
+	&--left {
+		float: left;
+	}
+	&--right {
+		float: right;
+	}
 }
 
 // Positioning
-.left {
-	float: left;
-}
-.right {
-	float: right;
-}
-.absolute {
-	position: absolute;
-}
-.relative {
-	position: relative;
+.position {
+	&--absolute {
+		position: absolute;
+	}
+	&--relative {
+		position: relative;
+	}
 }
 
 // Size
-.width-full {
-	width: 100%;
+.width {
+	&--full {
+		width: 100%;
+	}
+	&--half {
+		width: 50%;
+	}
+	&--quarter {
+		width: 25%;
+	}
+	&--third {
+		width: 33.33%;
+	}
 }
-.width-half {
-	width: 50%;
+
+// Text
+.text {
+	&--right {
+		text-align: right;
+	}
+	&--left {
+		text-align: left;
+	}
+	&--center {
+		text-align: center;
+	}
 }
-.width-quarter {
-	width: 25%;
+
+// Bg
+.bg {
+
 }
-.width-third {
-	width: 33.33%;
+
+// Color
+.color {
+	
 }
