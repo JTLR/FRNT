@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         // jade/html
-        jade: {
+        pug: {
             options: {
                 pretty: true
             },
@@ -78,19 +78,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // img
-        imagemin: {
-            dynamic: {
-                files: [{
-                    optimizationLevel: 7,
-                    flatten: true,
-                    expand: true,     
-                    src: "src/img/*.{png,jpg,gif}",
-                    dest: "dist/img/"
-                }]
-            }
-        },
-
 
         // watch
         watch: {
@@ -100,10 +87,6 @@ module.exports = function(grunt) {
             jade: {
                 files: ["src/jade/**/*.jade"],
                 tasks: ["jade"]
-            },
-            img: {
-                files: ["src/img/*.{png,jpg,gif}"],
-                tasks: ["imagemin:dynamic"]
             },
             jsLibs: {
                 files: ["src/js/libs/*.js", "!src/js/libs/*.min.js"],
@@ -123,9 +106,8 @@ module.exports = function(grunt) {
     // Load npm tasks
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("grunt-contrib-imagemin");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
-    grunt.loadNpmTasks("grunt-contrib-jade");
+    grunt.loadNpmTasks("grunt-contrib-pug");
     grunt.loadNpmTasks("grunt-combine-media-queries");
     grunt.loadNpmTasks("grunt-sass");
     grunt.loadNpmTasks("grunt-autoprefixer");
