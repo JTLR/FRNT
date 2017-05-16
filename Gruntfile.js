@@ -1,117 +1,53 @@
 module.exports = function(grunt) {
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON("package.json"),
 
-        // jade/html
-        pug: {
-            options: {
-                pretty: true
-            },
-            files: {
-                src: "src/jade/*.jade",
-                dest: "dist",
-                flatten: true,
-                expand: true,
-                ext: ".html"
-            }
-        },
+	// Automatically load our grunt tasks
+	require('load-grunt-tasks')(grunt);
 
-        // js
-        uglify: {
-            libs: {
-                src: ["src/js/libs/*.js", "!src/js/libs/*.min.js"],
-                dest: "dist/js/libs",
-                sourceMap: true,
-                expand: true,
-                flatten: true,
-                drop_console: true,
-                ext: ".min.js",
-                extDot: "last"
-            },
-            site: {
-                src: ["src/js/*.js", "!src/js/*.min.js"],
-                dest: "dist/js",
-                sourceMap: true,
-                expand: true,
-                flatten: true,
-                drop_console: true,
-                ext: ".min.js",
-                extDot: "last"
-            }
-        },
+	// Grunt task loader options
+	var options = {
+		config: {
+			src: './automation/*.js'
+		},
+		pkg: grunt.file.readJSON('package.json'),
+		paths: {
+			src: {
+				views: "./src/views",
+				scripts: "./src/scripts",
+				styles: "./src/styles",
+				fonts: "./src/fonts",
+				images: "./src/images"
+			},
+			build: {
+				views: "./build/views",
+				scripts: "./build/scripts",
+				styles: "./build/styles",
+				fonts: "./build/fonts",
+				images: "./build/images"
+			}
+			
+		}
+	};
 
-        // scss/css
-        sass: {
-            dev: {
-                files: {
-                    "dist/css/stylesheet.css": "src/scss/stylesheet.scss",
-                },
-                options : {
-                    sourceComments: "normal",
-                    includePaths: require("node-bourbon").includePaths
-                }
-            }
-        },
-        autoprefixer: {
-            options: {
-                browsers: ["last 2 versions", "ie 8", "ie 9"]
-            },
-            stylesheet: {
-                src: "dist/css/stylesheet.css",
-                dest: "dist/css/stylesheet.css"
-            }
-        },
-        cmq: {
-            stylesheet: {
-                files: {
-                    "dist/css/stylesheet.css": ["dist/css/stylesheet.css"]
-                }
-            }
+	var configs = require('load-grunt-configs')(grunt, options);
+	grunt.initConfig(configs);
 
-        },
-        cssmin: {
-            stylesheet: {
-                files: {
-                    "dist/css/stylesheet.min.css": ["dist/css/stylesheet.css"]
-                }
-            }
-        },
+	// Views
+	grunt.registerTask('templates', ['pug:dev']);
+	grunt.registerTask('html', ['pug:build']);
 
+	// Styles
+	grunt.registerTask('styles', ['sass:dist', 'postcss:dist', 'combine_mq:dist', 'cssmin:dist']);
 
-        // watch
-        watch: {
-            options: {
-                livereload: true
-            },
-            jade: {
-                files: ["src/jade/**/*.jade"],
-                tasks: ["jade"]
-            },
-            jsLibs: {
-                files: ["src/js/libs/*.js", "!src/js/libs/*.min.js"],
-                tasks: ["uglify:libs"]
-            },
-            jsSite: {
-                files: ["src/js/*.js", "!src/js/*.min.js"],
-                tasks: ["uglify:site"]
-            },
-            scss: {
-                files: ["src/scss/**/*.scss"],
-                tasks: ["sass", "autoprefixer", "cmq", "cssmin"]
-            }
-        }
-    });
+	// Images
+	grunt.registerTask('images', ['copy:images']);
+	
+	// Fonts
+	grunt.registerTask('fonts', ['copy:fonts']);
 
-    // Load npm tasks
-    grunt.loadNpmTasks("grunt-contrib-uglify");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("grunt-contrib-cssmin");
-    grunt.loadNpmTasks("grunt-contrib-pug");
-    grunt.loadNpmTasks("grunt-combine-media-queries");
-    grunt.loadNpmTasks("grunt-sass");
-    grunt.loadNpmTasks("grunt-autoprefixer");
+	// Scripts
+	grunt.registerTask('scripts', ['webpack-dev-server:start']);
 
-    // Defined tasks
-    grunt.registerTask("default", ["watch"]);
-};
+	grunt.registerTask('default', ['templates', 'styles', 'concurrent:app']);
+
+	grunt.registerTask('build', ['clean', 'html', 'styles', 'webpack']);
+}
