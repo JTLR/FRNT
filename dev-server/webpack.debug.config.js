@@ -16,51 +16,51 @@ console.log("/*===============================================*/");
 
 module.exports = {
 
-	entry: [
-		"webpack-dev-server/client?http://" + ip + ":8080",
-		"webpack/hot/only-dev-server",
-		"./src/app/index"
-	],
+    entry: [
+        "webpack-dev-server/client?http://" + ip + ":8080",
+        "webpack/hot/only-dev-server",
+        "./src/app/index"
+    ],
 
-	output: {
-			path: path.join(__dirname, "/build/js"),
-			publicPath: "/js/",
-			filename: "app.js"
-	},
+    output: {
+        path: path.join(__dirname, "/build/js"),
+        publicPath: "/js/",
+        filename: "app.js"
+    },
 
-	devServer: {
-		noInfo: true
-	},
+    devServer: {
+        noInfo: true
+    },
 
-	module: {
-			loaders: [
-					{
-						test: /\.js?$/,
-						exclude: /(node_modules)/,
-						loader: "babel"
-					},
-					{
-						test: /\.pug$/,
-						loader: "pug"
-					},
+    module: {
+        loaders: [
+            {
+                test: /\.js?$/,
+                exclude: /(node_modules)/,
+                loader: "babel"
+            },
+            {
+                test: /\.pug$/,
+                loader: "pug"
+            },
 
-					{
-						test: /\.json$/,
-						loader: "json"
-					}
-			]
-	},
+            {
+                test: /\.json$/,
+                loader: "json"
+            }
+        ]
+    },
 
-	resolve: {
-		extensions: ['', '.js', '.pug']
-	},
+    resolve: {
+        extensions: ['', '.js', '.pug']
+    },
 
-	plugins: [
-		new webpack.DefinePlugin({
-			__DEVELOPMENT__: true,
-			__DEVTOOLS__: false
-		}),
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
-	]
+    plugins: [
+        new webpack.DefinePlugin({
+            __DEVELOPMENT__: true,
+            __DEVTOOLS__: false
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ]
 }

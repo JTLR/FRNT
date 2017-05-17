@@ -4,7 +4,7 @@ module.exports = {
 			{
 				expand: true,
 				cwd: '<%= paths.build.styles %>',
-				src: ['**/*.css'],
+	        	src: ['**/*.css'],
 				dest: '<%= paths.build.styles %>',
 				ext: '.css'
 			}
