@@ -2,8 +2,8 @@ module.exports = {
     fonts: {
         files: [{
             expand: true,
-            cwd: '<%= paths.fonts %>',
-            src: ['**/*.woff', '**/*.woff2'],
+            cwd: '<%= paths.src.fonts %>',
+            src: ['**/*.{ttf,otf,woff,woff2,eot}'],
             dest: '<%= paths.build.fonts %>'
         }]
     },
@@ -11,8 +11,8 @@ module.exports = {
     images: {
         files: [{
             expand: true,
-            cwd: '<%= paths.images %>',
-            src: ['**/*.{jpg,png}'],
+            cwd: '<%= paths.src.images %>',
+            src: ['**/*.{jpg,png,gif}'],
             dest: '<%= paths.build.images %>'
         }]
     }
