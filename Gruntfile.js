@@ -11,32 +11,33 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         paths: {
             src: {
-                views: "./src/views",
-                scripts: "./src/scripts",
-                styles: "./src/styles",
-                fonts: "./src/fonts",
-                images: "./src/images"
+                views: "./src/views/",
+                scripts: "./src/scripts/",
+                styles: "./src/styles/",
+                fonts: "./src/fonts/",
+                images: "./src/images/"
             },
             build: {
-                views: "./build/views",
-                scripts: "./build/scripts",
-                styles: "./build/styles",
-                fonts: "./build/fonts",
-                images: "./build/images"
+                views: "./build/views/",
+                scripts: "./build/scripts/",
+                styles: "./build/styles/",
+                fonts: "./build/fonts/",
+                images: "./build/images/"
             }
-
         }
     };
+
+    
 
     var configs = require('load-grunt-configs')(grunt, options);
     grunt.initConfig(configs);
 
     // Views
-    grunt.registerTask('templates', ['pug:dev']);
-    grunt.registerTask('html', ['pug:build']);
+    grunt.registerTask('templates', ['pug:dev', 'filenamesToJson']);
+    grunt.registerTask('views', ['pug:build']);
 
     // Styles
-    grunt.registerTask('styles', ['sass:dist', 'postcss:dist', 'combine_mq:dist', 'cssmin:dist']);
+    grunt.registerTask('styles', ['sass:dist', 'postcss:dist', 'combine_mq:dist', 'uncss:dist', 'cssmin:dist']);
 
     // Images
     grunt.registerTask('images', ['copy:images']);
@@ -49,5 +50,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['templates', 'styles', 'concurrent:app']);
 
-    grunt.registerTask('build', ['clean', 'html', 'styles', 'webpack']);
+    grunt.registerTask('build', ['clean', 'views', 'styles', 'webpack']);
 }

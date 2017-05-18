@@ -1,7 +1,7 @@
 module.exports = {
 
     styles: {
-        cwd: "<%= paths.sass %>",
+        cwd: "<%= paths.src.styles %>",
         files: ['**/*.scss'],
         tasks: ['styles'],
         options: {
@@ -11,20 +11,9 @@ module.exports = {
     },
 
     css: {
-        cwd: "<%= paths.css %>",
+        cwd: "<%= paths.build.styles %>",
         files: ['**/*.min.css'],
         options: {
-            livereload: true
-        }
-    },
-
-    scripts: {
-        cwd: "<%= paths.build.scripts %>",
-        files: ['**/*.js'],
-        tasks: ['scripts'],
-        options: {
-            spawn: true,
-            interrupt: true,
             livereload: true
         }
     },
