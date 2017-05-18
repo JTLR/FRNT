@@ -1,16 +1,30 @@
 // Libs
 @import "bourbon";
 
-// Base
-@import "base/reset";
-
 // Fonts
 
 // Helpers
+// -- Variables
 @import "helpers/variables";
-@import "helpers/functions";
-@import "helpers/mixins";
+
+// -- Functions
+@import "helpers/functions/rem";
+
+// -- Mixins
+@import "helpers/mixins/breakpoint";
+@import "helpers/mixins/placeholder";
+
+// -- Classes
 @import "helpers/classes";
 
-// Site
+// Site/app
+@import "site/reset";
 @import "site/demo";
+
+h1 {
+    font-size: 100px;
+}
+
+h3 {
+    font-size: 50px;
+}

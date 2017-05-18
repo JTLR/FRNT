@@ -1,8 +1,0 @@
-@function rem ($pixels, $support: true) {
-	@if $support == true {
-		@return ($pixels / 16) + rem;
-	}
-	@else {
-		@return $pixels + px;
-	}
-}
