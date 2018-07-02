@@ -1,9 +1,0 @@
-@mixin breakpoint($min-width, $breakpoint: 2, $support: true)  {
-	@if $support == true and $breakpoint > 1 {
-		@media screen and (min-width: $min-width) {
-			@content;
-		}
-	} @else {
-		@content;
-	}
-}

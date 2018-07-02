@@ -1,54 +1,135 @@
 module.exports = function (grunt) {
+    // Project configuration
+    grunt.initConfig({
+        pkg: grunt.file.readJSON("package.json"),
 
-    // Automatically load our grunt tasks
-    require('load-grunt-tasks')(grunt);
-
-    // Grunt task loader options
-    var options = {
-        config: {
-            src: './automation/*.js'
-        },
-        pkg: grunt.file.readJSON('package.json'),
-        paths: {
-            src: {
-                views: "./src/views/",
-                scripts: "./src/scripts/",
-                styles: "./src/styles/",
-                fonts: "./src/fonts/",
-                images: "./src/images/"
+        // commands
+        run: {
+            cacheBustCSS: {
+                args: ["automation/update-cache-busting.js", "css"]
             },
-            build: {
-                views: "./build/views/",
-                scripts: "./build/scripts/",
-                styles: "./build/styles/",
-                fonts: "./build/fonts/",
-                images: "./build/images/"
+            cacheBustJS: {
+                args: ["automation/update-cache-busting.js", "js"]
+            }
+        },
+
+        // webpack
+        webpack: {
+            main: require("./webpack.config.js")
+        },
+
+        // scss/css
+        sass: {
+            main: {
+                files: {
+                    "dist/css/style.css": "src/scss/style.scss"
+                }
+            }
+        },
+        autoprefixer: {
+            options: {
+                browsers: ["last 3 versions"]
+            },
+            main: {
+                files: {
+                    "dist/css/style.css": "dist/css/style.css"
+                }
+            }
+        },
+        cmq: {
+            main: {
+                files: {
+                    "dist/css/style.css": "dist/css/style.css"
+                }
+            }
+        },
+        cssmin: {
+            main: {
+                files: {
+                    "dist/css/style.css": "dist/css/style.css"
+                }
+            }
+        },
+
+        // Copy
+        copy: {
+            style: {
+                cwd: "dist/css",
+                src: "**/*",
+                dest: "wp-content/themes/FRNT/",
+                expand: true
+            },
+            js: {
+                cwd: "dist/js",
+                src: "**/*",
+                dest: "wp-content/themes/FRNT/js/",
+                expand: true
+            }
+        },
+
+        clean: {
+            js: ["dist/js", "wp-content/themes/FRNT/js"],
+            style: [
+                "dist/css",
+                "wp-content/themes/FRNT/style.css",
+            ]
+        },
+
+        // watch
+        watch: {
+            options: {
+                livereload: true
+            },
+            js: {
+                files: ["src/js/**/*.js"],
+                tasks: [
+                    "webpack:main",
+                    "copy:js",
+                    "run:cacheBustJS"
+                ]
+            },
+            css: {
+                files: ["src/scss/**/*.scss"],
+                tasks: [
+                    "sass:main",
+                    "autoprefixer:main",
+                    "cmq:main",
+                    "cssmin:main",
+                    "copy:style",
+                    "run:cacheBustCSS"
+                ]
+            },
+            wordpress: {
+                files: [
+                    "wp-content/themes/FRNT/*.php",
+                    "wp-content/themes/FRNT/functions/*.php",
+                    "wp-content/themes/FRNT/templates/**/*.php"
+                ]
             }
         }
-    };
+    });
 
-    
+    // Load npm tasks
+    grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
+    grunt.loadNpmTasks("grunt-combine-media-queries");
+    grunt.loadNpmTasks("grunt-sass");
+    grunt.loadNpmTasks("grunt-autoprefixer");
+    grunt.loadNpmTasks("grunt-notify");
+    grunt.loadNpmTasks("grunt-webpack");
+    grunt.loadNpmTasks("grunt-run");
 
-    var configs = require('load-grunt-configs')(grunt, options);
-    grunt.initConfig(configs);
-
-    // Views
-    grunt.registerTask('templates', ['pug:dev', 'filenamesToJson']);
-    grunt.registerTask('views', ['pug:build']);
-
-    // Styles
-    grunt.registerTask('styles', ['sass:dist', 'postcss:dist', 'combine_mq:dist', 'uncss:dist', 'cssmin:dist']);
-
-    // Images
-    grunt.registerTask('images', ['copy:images']);
-
-    // Fonts
-    grunt.registerTask('fonts', ['copy:fonts']);
-
-    // Scripts
-    grunt.registerTask('scripts', ['webpack-dev-server:start']);
-
-    grunt.registerTask('default', ['templates', 'styles', 'concurrent:app']);
-
-    grunt.registerTask('build', ['clean', 'views', 'styles', 'webpack']);
-}
+    // Defined tasks
+    grunt.registerTask("default", ["watch"]);
+    grunt.registerTask("build", [
+        "sass:main",
+        "autoprefixer:main",
+        "cmq:main",
+        "cssmin:main",
+        "copy:style",
+        "webpack:main",
+        "copy:js"
+    ]);
+};
