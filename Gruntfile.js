@@ -13,6 +13,20 @@ module.exports = function(grunt) {
             }
         },
 
+        // pug/html
+        pug: {
+            options: {
+                pretty: true
+            },
+            files: {
+                src: "src/pug/*.pug",
+                dest: "dist",
+                flatten: true,
+                expand: true,
+                ext: ".html"
+            }
+        },
+
         // webpack
         webpack: {
             main: require("./webpack.config.js")
@@ -69,13 +83,18 @@ module.exports = function(grunt) {
 
         clean: {
             js: ["dist/js", "wp-content/themes/FRNT/js"],
-            style: ["dist/css", "wp-content/themes/FRNT/style.css"]
+            style: ["dist/css", "wp-content/themes/FRNT/style.css"],
+            html: ["dist/*.html"]
         },
 
         // watch
         watch: {
             options: {
                 livereload: true
+            },
+            html: {
+                files: ["src/pug/*.pug"],
+                tasks: ["clean:html", "pug"]
             },
             js: {
                 files: ["src/js/**/*.js"],
@@ -113,6 +132,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-combine-media-queries");
+    grunt.loadNpmTasks("grunt-contrib-pug");
     grunt.loadNpmTasks("grunt-sass");
     grunt.loadNpmTasks("grunt-autoprefixer");
     grunt.loadNpmTasks("grunt-notify");
@@ -122,6 +142,7 @@ module.exports = function(grunt) {
     // Defined tasks
     grunt.registerTask("default", ["watch"]);
     grunt.registerTask("build", [
+        "clean:html",
         "clean:style",
         "clean:js",
         "sass:main",
@@ -130,6 +151,7 @@ module.exports = function(grunt) {
         "cssmin:main",
         "copy:style",
         "webpack:main",
-        "copy:js"
+        "copy:js",
+        "pug"
     ]);
 };
