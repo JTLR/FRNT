@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // Project configuration
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
@@ -69,10 +69,7 @@ module.exports = function (grunt) {
 
         clean: {
             js: ["dist/js", "wp-content/themes/FRNT/js"],
-            style: [
-                "dist/css",
-                "wp-content/themes/FRNT/style.css",
-            ]
+            style: ["dist/css", "wp-content/themes/FRNT/style.css"]
         },
 
         // watch
@@ -83,6 +80,7 @@ module.exports = function (grunt) {
             js: {
                 files: ["src/js/**/*.js"],
                 tasks: [
+                    "clean:js",
                     "webpack:main",
                     "copy:js",
                     "run:cacheBustJS"
@@ -124,6 +122,8 @@ module.exports = function (grunt) {
     // Defined tasks
     grunt.registerTask("default", ["watch"]);
     grunt.registerTask("build", [
+        "clean:style",
+        "clean:js",
         "sass:main",
         "autoprefixer:main",
         "cmq:main",

@@ -516,3 +516,5 @@ error_log
 .history
 
 robots.txt
+
+wp-content/themes/FRNT/js

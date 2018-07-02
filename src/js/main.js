@@ -1,6 +1,4 @@
-import {
-    initComponents
-} from "./functions/initComponents";
+import { initComponents } from "./functions/initComponents";
 
 document.addEventListener("DOMContentLoaded", initialise());
 

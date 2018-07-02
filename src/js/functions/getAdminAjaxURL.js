@@ -4,7 +4,7 @@ export function getAdminAjaxURL() {
     let adminAjaxURL = "/wp-admin/admin-ajax.php";
 
     if (isLocal()) {
-        adminAjaxURL = "/frnt" + adminAjaxURL;
+        adminAjaxURL = "/FRNT" + adminAjaxURL;
     }
 
     return adminAjaxURL;
